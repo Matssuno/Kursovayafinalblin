@@ -1,90 +1,139 @@
-﻿<!DOCTYPE html>
-<html lang="un">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Raleway:ital,wght@0,400;1,600&display=swap"
-          rel="stylesheet">
-        <link rel="stylesheet" href="index.css">
-        <script type="application/javascript" src="index.js"></script>
-        <script src="https://www.google.com/jsapi"></script>
-        <script>
-            google.load("visualization", "1", {packages: ["corechart"]});
-            google.setOnLoadCallback(drawCharts); 
-        </script>
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Raleway:ital,wght@0,400;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/javascript" src="index.js"></script>
     <title>Курсовая работа</title>
 </head>
+
 <body>
-<div class="content">
-    <h1 class="naim1">Велком на страницу успеваемости 10го класса!</h1>
-    <img src="real_klassniy_jurnal.jpg" align="top" vspace="20" hspace="150">
-    <table class="navbar" align="center">
-        <tr>
-            <td>
-                <a href="#load" onclick="view('load'); return false">Загрузить оценки</a>
-            </td>
-            <td>
-                <a href="#edit" onclick="view('edit'); return false">Редактировать журнал</a>
-            </td>
-            <td>
-                <a href="#statistics" onclick="view('statistics'); return false">Статистика (Табличная)</a>
-            </td>
-            <td>
-                <a href="#charts" onclick="view('charts'); return false">Статистика (Графическая)</a>
-            </td>
-            <td>
-                <a href="#helpmepls" onclick="view('helpmepls'); return false">Помощь</a>
-            </td>
-            <td>
-                <a href="#aboutmexd" onclick="view('aboutmexd'); return false">О программе</a>
-            </td>
-        </tr>
-    </table>
-    <hr>
-    <div id="load" style="display: none;">
-        <hr>
-        <h1>Загрузка оценок</h1>
-        <input type="file" id="fileInput" onchange="loadStudentsData()">
-    </div>
-    <div id="edit" style="display: none;">
-        <hr>
-        <h1>Редактирование/Добавление/Удаление студентов</h1>
-        <table id="editTable" border="1">
+    <div class="content">
+        <h1 class="naim1">Велком на страницу успеваемости 10го класса!</h1>
+        <img src="real_klassniy_jurnal.jpg" align="top" vspace="20" hspace="150">
+        <table class="navbar" align="center">
+            <tr>
+                <td>
+                    <a href="#load" onclick="view('load'); return false">Загрузить оценки</a>
+                </td>
+                <td>
+                    <a href="#edit" onclick="view('edit'); return false">Редактировать журнал</a>
+                </td>
+                <td>
+                    <a href="#statistics" onclick="view('statistics'); return false">Статистика (Табличная)</a>
+                </td>
+                <td>
+                    <a href="#charts" onclick="view('charts'); return false">Статистика (Графическая)</a>
+                </td>
+                <td>
+                    <a href="#helpmepls" onclick="view('helpmepls'); return false">Помощь</a>
+                </td>
+                <td>
+                    <a href="#aboutmexd" onclick="view('aboutmexd'); return false">О программе</a>
+                </td>
+            </tr>
         </table>
-        <button onclick="saveData('csv')">Сохранить в CSV</button>
-        <button onclick="saveData('txt')">Сохранить в TXT</button>
-        <button onclick="saveData('xlsx')">Сохранить в XLSX</button>
-    </div>
-    <div id="statistics" style="display: none;">
         <hr>
-        <h1>Статистика (Табличная)</h1>
-        <table id="statisticsTable" border="1">
-        </table>
+        <div id="load" style="display: none;">
+            <hr>
+            <h1>Загрузка оценок</h1>
+            <input type="file" id="fileInput" onchange="loadStudentsData()">
+        </div>
+        <div id="edit" style="display: none;">
+            <hr>
+            <h1>Редактирование/Добавление/Удаление студентов</h1>
+            <table id="editTable" border="1">
+            </table>
+            <button onclick="saveData('csv')">Сохранить в CSV</button>
+            <button onclick="saveData('txt')">Сохранить в TXT</button>
+            <button onclick="saveData('xlsx')">Сохранить в XLSX</button>
+        </div>
+        <div id="statistics" style="display: none;">
+            <hr>
+            <h1>Статистика (Табличная)</h1>
+            <table id="statisticsTable" border="1">
+            </table>
+            <table id="studentsStatisticsTable" border="1" style="display: none;">
+            </table>
+        </div>
+        <div id="charts" style="display: none;">
+            <hr>
+            <h1>Статистика (Графическая)</h1>
+            <canvas id="chart-average"></canvas>
+            <canvas id="chart-median"></canvas>
+            <button onclick="drawChart()">Построить график классов</button>
+            <canvas id="studentGradesChart"></canvas>
+            <button onclick="drawstudentChart()">Построить график статистики учеников</button>
+        </div>
+        <div id="helpmepls" style="display: none;">
+            <hr>
+            <h1>Помощь</h1>
+            <img src="jabich.jpg" alt="pomogite">
+            <p>Помощь не потребуется, клавиши работают, вопросов быть не должно я считаю </p>
+            <p>но в случае чего по всем вопросам обращаться <a
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=4s&ab_channel=RickAstley" target="_blank"
+                    style="color: rgb(255, 0, 255);">сюда</a></p>
+        </div>
+        <div id="aboutmexd" style="display: none;">
+            <hr>
+            <h1>О программе</h1>
+            <img src="9f4bb171211f910e3c6380f347b65d42.png" alt="Картинка о программе">
+            <p>Этот журнал сделал крайне уставший студент третьего курса ИБ СибГУТИ </p>
+            <p>ХОЧУ ЗАЧЕТ </p>
+            <p>ОЧЕНЬ СИЛЬНО БЛИН </p>
+            <p>Поставьте его пожалуйста!! </p>
+            <p>я вас умоляю...</p>
+            <p>но если вы сегодня очень злой и хотите меня расстроить, то напишите это пожалуйста в личные сообщения вот
+                сюда: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=4s&ab_channel=RickAstley" target="_blank"
+                    style="color: red;">кликабельно</a></p>
+        </div>
     </div>
-    <div id="charts" style="display: none;">
-        <hr>
-        <h1>Статистика (Графическая)</h1>
-        <div id="chart_div"></div> 
-    </div>
-    <div id="helpmepls" style="display: none;">
-        <hr>
-        <h1>Помощь</h1>
-        <img src="jabich.jpg" alt="pomogite">
-        <p>Помощь не потребуется, клавиши работают, вопросов быть не должно я считаю </p>
-        <p>но в случае чего по всем вопросам обращаться <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=4s&ab_channel=RickAstley" target="_blank" style="color: rgb(255, 0, 255);">сюда</a></p>
-    </div>
-    <div id="aboutmexd" style="display: none;">
-        <hr>
-        <h1>О программе</h1>
-        <img src="9f4bb171211f910e3c6380f347b65d42.png" alt="Картинка о программе">
-        <p>Этот журнал сделал крайне уставший студент третьего курса ИБ СибГУТИ </p>
-        <p>ХОЧУ ЗАЧЕТ </p>
-        <p>ОЧЕНЬ СИЛЬНО БЛИН </p>
-        <p>Поставьте его пожалуйста!! </p>
-        <p>я вас умоляю...</p>
-        <p>но если вы сегодня очень злой и хотите меня расстроить, то напишите это пожалуйста в личные сообщения вот сюда: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=4s&ab_channel=RickAstley" target="_blank" style="color: red;">кликабельно</a></p>
-    </div>
-</div>
+
+    <script>
+        // Подключаем библиотеку Chart.js
+        let ctx = document.getElementById('chart').getContext('2d');
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Average Grade',
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    data: []
+                },
+                {
+                    label: 'Median Grade',
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    data: []
+                },
+                {
+                    label: 'Percentage of Grades',
+                    backgroundColor: 'rgba(255, 206, 86, 0.5)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1,
+                    data: []
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
 </body>
+
 </html>

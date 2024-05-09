@@ -1,8 +1,9 @@
 body {
     margin: 0;
-    background: cornsilk url("maxresdefault.jpg") ;
+    background: cornsilk url("maxresdefault.jpg");
     background-attachment: fixed;
 }
+
 .content {
     width: 70%;
     margin: 70px auto 0 auto;
@@ -10,47 +11,54 @@ body {
     min-height: calc(100vh - 200px);
     padding: 20px;
 }
+
 .naim {
     font-size: 34px;
     color: #345B7C;
-	text-align: left;
-	text-indent: 5px;
+    text-align: left;
+    text-indent: 5px;
 }
+
 .naim2 {
     font-size: 34px;
     color: #68347c;
-	text-align: left;
-	text-indent: 1px
-	
+    text-align: left;
+    text-indent: 1px
 }
+
 .naim1 {
     font-size: 34px;
     color: #76347c;
-	text-align: center;
-	text-indent: 20px;
+    text-align: center;
+    text-indent: 20px;
 }
+
 a {
     text-decoration: none;
-    color:black;
+    color: black;
     padding: 25px;
 
 }
+
 .navbar {
-    background-color:#FFFFFF;
+    background-color: #FFFFFF;
     margin-top: 15px;
 }
+
 td {
     border: 2px solid #000000;
     padding: 10px;
     font-size: 15px;
 }
+
 hr {
     border: none;
-    color:black;
+    color: black;
     background-color: black;
     height: 3px;
 }
-table{
+
+table {
     margin-top: 25px;
-	 
+
 }
